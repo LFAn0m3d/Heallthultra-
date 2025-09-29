@@ -18,13 +18,17 @@ FastAPI backend that analyzes chronic non-communicable disease (NCD) and mental 
 - Docker and Docker Compose, or Python 3.11 with virtualenv.
 
 ### Environment Variables
-Copy `.env.example` to `.env` and update secrets:
+Environment variables are required for startup. Use `.env.example` as
+documentation, copy it to `.env`, and replace every placeholder with real
+values:
 
 ```bash
 cp .env.example .env
 ```
 
-Key variables:
+The application only loads `.env` (plus any variables already present in the
+environment); missing secrets will raise a clear error at startup. Key
+variables:
 - `DATABASE_URL`: e.g. `postgresql+psycopg2://postgres:postgres@db:5432/healthai`
 - `JWT_SECRET_KEY` / `JWT_REFRESH_SECRET_KEY`: long random strings.
 - `RATE_LIMIT_CALLS` & `RATE_LIMIT_PERIOD`: integer calls per period (seconds).
