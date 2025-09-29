@@ -8,7 +8,16 @@ from uuid import uuid4
 import pytest
 from .utils import SimpleASGITestClient
 from sqlalchemy import create_engine
+from sqlalchemy.dialects.sqlite.base import SQLiteTypeCompiler
 from sqlalchemy.orm import Session, sessionmaker
+
+
+def _ensure_sqlite_uuid_support() -> None:
+    if not hasattr(SQLiteTypeCompiler, "visit_UUID"):
+        SQLiteTypeCompiler.visit_UUID = lambda self, type_, **kw: "CHAR(32)"  # type: ignore[attr-defined]
+
+
+_ensure_sqlite_uuid_support()
 
 from app import deps
 from app.db import Base
