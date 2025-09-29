@@ -1,0 +1,65 @@
+{
+  "info": {
+    "name": "HealthAI Assistant API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"demo@example.com\",\n  \"password\": \"DemoPass123\",\n  \"name\": \"Demo User\"\n}"
+        },
+        "url": {"raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"]}
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"demo@example.com\",\n  \"password\": \"DemoPass123\"\n}"
+        },
+        "url": {"raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"]}
+      }
+    },
+    {
+      "name": "Create Episode",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{access_token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"domain\": \"NCD\",\n  \"primary_symptom\": \"High blood pressure\",\n  \"severity_0_10\": 6\n}"
+        },
+        "url": {"raw": "{{baseUrl}}/episodes", "host": ["{{baseUrl}}"], "path": ["episodes"]}
+      }
+    },
+    {
+      "name": "Run Recommender",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Authorization", "value": "Bearer {{access_token}}"}
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/recommendations/{{episode_id}}/recommend",
+          "host": ["{{baseUrl}}"],
+          "path": ["recommendations", "{{episode_id}}", "recommend"]
+        }
+      }
+    }
+  ]
+}
