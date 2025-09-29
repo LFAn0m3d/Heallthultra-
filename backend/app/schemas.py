@@ -33,6 +33,12 @@ class AnalyzeIn(BaseModel):
     phq9: Optional[float] = None
     gad7: Optional[float] = None
     isi: Optional[float] = None
+    severity_0_10: Optional[int] = Field(
+        default=None,
+        ge=0,
+        le=10,
+        description="Self-reported symptom severity on a 0-10 scale",
+    )
     red_flag_answers: Dict[str, bool] = Field(default_factory=dict)
     self_harm: Optional[bool] = None
 

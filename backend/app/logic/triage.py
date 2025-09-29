@@ -38,7 +38,10 @@ def triage_level_from_inputs(payload: Dict) -> Tuple[str, List[str], str]:
         rationale_parts.append("ระดับน้ำตาลสูงกว่าปกติ")
 
     if not rationale_parts:
-        triage_level = "เหลือง" if payload.get("severity", 0) >= 5 else "เขียว"
+        severity_score = payload.get("severity_0_10")
+        if severity_score is None:
+            severity_score = 0
+        triage_level = "เหลือง" if severity_score >= 5 else "เขียว"
         if triage_level == "เหลือง":
             actions.append("นัดพบแพทย์ภายใน 24-48 ชั่วโมง")
             rationale_parts.append("ระดับอาการปานกลาง")
