@@ -44,16 +44,16 @@ def interpret_trend(metric: str, slope: float) -> str:
     """Provide a qualitative interpretation based on slope."""
     threshold = 0.1
     if slope <= -threshold:
-        return "ดีขึ้น"
+        return "improving"
     if slope >= threshold:
-        return "แย่ลง"
-    return "ทรงตัว"
+        return "worsening"
+    return "stable"
 
 
 def confidence_from_points(points: Sequence) -> str:
     count = len(points)
     if count >= 8:
-        return "สูง"
+        return "high"
     if count >= 4:
-        return "กลาง"
-    return "ต่ำ"
+        return "medium"
+    return "low"
